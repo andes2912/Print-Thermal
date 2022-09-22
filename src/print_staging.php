@@ -5,7 +5,7 @@ use Mike42\Escpos\PrintConnectors\WindowsPrintConnector;
 use Mike42\Escpos\Printer;
 use Mike42\Escpos\EscposImage;
 
-$connector = new WindowsPrintConnector("PrinterThermal1");
+$connector = new WindowsPrintConnector("Testing");
 $printer = new Printer($connector);
 
 //printah untuk membuka laci / cash drawer
@@ -27,6 +27,8 @@ if ($_POST['type'] == 'sp2') {
     $printer->text('INVOICE PERPANJANGAN STORAGE');
 } elseif ($_POST['type'] == 'sp2_out') {
     $printer->text('INVOICE STRIPPING INTERCHANGE');
+} elseif($_POST['type'] == 'jasa_muat') {
+    $printer->text('INVOICE STEVEDORING');
 }
 
 $printer->text("\n");
@@ -157,7 +159,7 @@ if ($_POST['type'] == 'sp2') {
             $item['container_type'],
             number_format($_POST['sub_total'] / count($_POST['items'])),
         ));
-       $total3 = $item['sub_total'];
+       $total3 = $_POST['sub_total'];
     }
 }elseif ($_POST['type'] == 'sp2_out') {
     // INTERCHANGE
@@ -194,7 +196,7 @@ if ($_POST['type'] == 'sp2') {
 
     }
 }elseif ($_POST['type'] == 'sp2_muat_int') {
-    // PENUMPUKAN MASA
+    //INTECHANGE
     $printer->setEmphasis(true);
     $printer->text("Biaya Stuffing Muat \n");
     $printer->initialize(); // Reset bentuk/jenis teks
@@ -210,12 +212,37 @@ if ($_POST['type'] == 'sp2') {
         $total4 = $item['sub_total'];
 
     }
+}elseif($_POST['type'] == 'jasa_muat') {
+    // STEVEDORING
+    $printer->text("Biaya Stevedoring+LOLO \n");
+    $printer->text(buatBaris4Kolom("No Kontainer","Detail", "Total"));
+    $printer->text("----------------------------------------------------------\n");
+    foreach ($_POST['items'] as $item) {
+        $printer->text(buatBaris4Kolom(
+            strtoupper($item['container']),
+            $item['container_type'],
+            number_format($_POST['sub_total'] / count($_POST['items'])),
+        ));
+       $total5 = $_POST['sub_total'];
+    }
+} elseif($_POST['type'] == 'spk_depo_in') {
+    // SPK DEPO IN
+    $printer->text("SPK Depo \n");
+    $printer->text(buatBaris4Kolom("No Kontainer","Detail", "Total"));
+    $printer->text("----------------------------------------------------------\n");
+    foreach ($_POST['items'] as $item) {
+        $printer->text(buatBaris4Kolom(
+            strtoupper($item['container']),
+            $item['container_type'],
+            number_format($_POST['sub_total'] / count($_POST['items'])),
+        ));
+       $total6 = $_POST['sub_total'];
+    }
 }
-$sub_total = $total + $total1 + $total2 + $total3 + $total4;
-if($_POST['ppn'] != 0){
+$sub_total = $total + $total1 + $total2 + $total3 + $total4 + $total5 + $total6;
+if ($_POST['ppn'] != 0) {
     $ppn = $sub_total*11/100;
 }
-
 $printer->text("----------------------------------------------------------\n");
 $printer->setEmphasis(true);
 $printer->text(buatBaris4Kolom('TAGIHAN','Rp.'.number_format($sub_total),''));
