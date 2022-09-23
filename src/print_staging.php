@@ -233,7 +233,7 @@ elseif ($_POST['type'] == 'container_storage') {
 }elseif ($_POST['type'] == 'sp2_muat_int') {
     //INTECHANGE
     $printer->setEmphasis(true);
-    $printer->text("Biaya Stuffing Muat \n");
+    $printer->text("Biaya Interchange Muat \n");
     $printer->initialize(); // Reset bentuk/jenis teks
     $printer->setFont(Printer::FONT_B);
     $printer->text(buatBaris4Kolom("No Kontainer","Detail", "Total"));
@@ -262,7 +262,7 @@ elseif ($_POST['type'] == 'container_storage') {
     }
 } elseif($_POST['type'] == 'spk_depo_in') {
     // SPK DEPO IN
-    $printer->text("SPK Depo \n");
+    $printer->text("Biaya SPK Muat Depo \n");
     $printer->text(buatBaris4Kolom("No Kontainer","Detail", "Total"));
     $printer->text("----------------------------------------------------------\n");
     foreach ($_POST['items'] as $item) {
