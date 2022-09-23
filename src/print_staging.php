@@ -168,6 +168,10 @@ if ($_POST['type'] == 'sp2') {
     }
 
 }elseif($_POST['type'] == 'sp2_muat') {
+    $printer->setEmphasis(true);
+    $printer->text("Biaya SP2 Muat \n");
+    $printer->initialize(); // Reset bentuk/jenis teks
+    $printer->setFont(Printer::FONT_B);
     $printer->text(buatBaris4Kolom("No Kontainer","Detail", "Total"));
     $printer->text("----------------------------------------------------------\n");
     foreach ($_POST['items'] as $item) {
@@ -249,7 +253,10 @@ elseif ($_POST['type'] == 'container_storage') {
     }
 }elseif($_POST['type'] == 'jasa_muat') {
     // STEVEDORING
+    $printer->setEmphasis(true);
     $printer->text("Biaya Stevedoring+LOLO \n");
+    $printer->initialize(); // Reset bentuk/jenis teks
+    $printer->setFont(Printer::FONT_B);
     $printer->text(buatBaris4Kolom("No Kontainer","Detail", "Total"));
     $printer->text("----------------------------------------------------------\n");
     foreach ($_POST['items'] as $item) {
@@ -262,7 +269,10 @@ elseif ($_POST['type'] == 'container_storage') {
     }
 } elseif($_POST['type'] == 'spk_depo_in') {
     // SPK DEPO IN
+    $printer->setEmphasis(true);
     $printer->text("Biaya SPK Muat Depo \n");
+    $printer->initialize(); // Reset bentuk/jenis teks
+    $printer->setFont(Printer::FONT_B);
     $printer->text(buatBaris4Kolom("No Kontainer","Detail", "Total"));
     $printer->text("----------------------------------------------------------\n");
     foreach ($_POST['items'] as $item) {
