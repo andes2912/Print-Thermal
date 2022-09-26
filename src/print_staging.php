@@ -207,7 +207,7 @@ elseif ($_POST['type'] == 'jasa_bongkar') {
     $printer->setFont(Printer::FONT_B);
     $printer->text(buatBaris4Kolom("No Kontainer","Detail", "Total"));
     $printer->text("----------------------------------------------------------\n");
-    foreach ($_POST['sp2_out_items'] as $item) {
+    foreach ($_POST['jasa_bongkar_items'] as $item) {
         $printer->text(buatBaris4Kolom(
             strtoupper($item['container']),
             $item['name'],
