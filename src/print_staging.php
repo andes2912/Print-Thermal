@@ -42,8 +42,8 @@ $printer->text("\n");
 function buatBaris4Kolom($kolom1, $kolom2, $kolom3) {
     // Mengatur lebar setiap kolom (dalam satuan karakter)
     $lebar_kolom_1 = 18;
-    $lebar_kolom_2 = 18;
-    $lebar_kolom_3 = 18;
+    $lebar_kolom_2 = 22;
+    $lebar_kolom_3 = 16;
     // $lebar_kolom_4 = 9;
 
     // Melakukan wordwrap(), jadi jika karakter teks melebihi lebar kolom, ditambahkan \n
