@@ -5,7 +5,7 @@ use Mike42\Escpos\PrintConnectors\WindowsPrintConnector;
 use Mike42\Escpos\Printer;
 use Mike42\Escpos\EscposImage;
 
-$connector = new WindowsPrintConnector("Testing");
+$connector = new WindowsPrintConnector("PrinterThermal1");
 $printer = new Printer($connector);
 
 //printah untuk membuka laci / cash drawer
