@@ -29,6 +29,10 @@ if ($_POST['type'] == 'sp2') {
     $printer->text('INVOICE STRIPPING INTERCHANGE');
 } elseif($_POST['type'] == 'jasa_muat') {
     $printer->text('INVOICE STEVEDORING');
+} elseif($_POST['type'] == 'sp_bongkar') {
+  $printer->text('JASA SPESIAL PRICE BONGKAR');
+} elseif($_POST['type'] == 'sp_muat') {
+  $printer->text('JASA SPESIAL PRICE BONGKAR');
 }
 
 $printer->text("\n");
@@ -283,8 +287,42 @@ elseif ($_POST['type'] == 'container_storage') {
         ));
        $total6 = $_POST['sub_total'];
     }
+} elseif($_POST['type'] == 'sp_bongkar') {
+    // SPK DEPO IN
+    $printer->setEmphasis(true);
+    $printer->text("Jasa Handling Khusus Bongkar\n");
+    $printer->initialize(); // Reset bentuk/jenis teks
+    $printer->setFont(Printer::FONT_B);
+    $printer->text(buatBaris4Kolom("No Kontainer","Detail", "Total"));
+    $printer->text("----------------------------------------------------------\n");
+    foreach ($_POST['sp_bongkar_items'] as $item) {
+        $printer->text(buatBaris4Kolom(
+            strtoupper($item['container']),
+            $item['container_type'],
+            number_format($_POST['sub_total'] / count($_POST['sp_bongkar_items'])),
+        ));
+       $total8 = $_POST['sub_total'];
+    }
+} elseif($_POST['type'] == 'sp_muat') {
+    // SPK DEPO IN
+    $printer->setEmphasis(true);
+    $printer->text("Jasa Handling Khusus Muat\n");
+    $printer->initialize(); // Reset bentuk/jenis teks
+    $printer->setFont(Printer::FONT_B);
+    $printer->text(buatBaris4Kolom("No Kontainer","Detail", "Total"));
+    $printer->text("----------------------------------------------------------\n");
+    foreach ($_POST['sp_muat_items'] as $item) {
+        $printer->text(buatBaris4Kolom(
+            strtoupper($item['container']),
+            $item['container_type'],
+            number_format($_POST['sub_total'] / count($_POST['sp_muat_items'])),
+        ));
+       $total9 = $_POST['sub_total'];
+    }
 }
-$sub_total = $total + $total1 + $total2 + $total3 + $total4 + $total5 + $total6 + $total7;
+
+
+$sub_total = $total + $total1 + $total2 + $total3 + $total4 + $total5 + $total6 + $total7 + $total8 + $total9;
 if ($_POST['ppn'] != 0) {
     $ppn = $sub_total*11/100;
 }

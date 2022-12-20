@@ -295,11 +295,11 @@ elseif ($_POST['type'] == 'container_storage') {
     $printer->setFont(Printer::FONT_B);
     $printer->text(buatBaris4Kolom("No Kontainer","Detail", "Total"));
     $printer->text("----------------------------------------------------------\n");
-    foreach ($_POST['items'] as $item) {
+    foreach ($_POST['sp_bongkar_items'] as $item) {
         $printer->text(buatBaris4Kolom(
             strtoupper($item['container']),
             $item['container_type'],
-            number_format($_POST['sub_total'] / count($_POST['items'])),
+            number_format($_POST['sub_total'] / count($_POST['sp_bongkar_items'])),
         ));
        $total8 = $_POST['sub_total'];
     }
@@ -311,11 +311,11 @@ elseif ($_POST['type'] == 'container_storage') {
     $printer->setFont(Printer::FONT_B);
     $printer->text(buatBaris4Kolom("No Kontainer","Detail", "Total"));
     $printer->text("----------------------------------------------------------\n");
-    foreach ($_POST['items'] as $item) {
+    foreach ($_POST['sp_muat_items'] as $item) {
         $printer->text(buatBaris4Kolom(
             strtoupper($item['container']),
             $item['container_type'],
-            number_format($_POST['sub_total'] / count($_POST['items'])),
+            number_format($_POST['sub_total'] / count($_POST['sp_muat_items'])),
         ));
        $total9 = $_POST['sub_total'];
     }
